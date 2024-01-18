@@ -11,6 +11,7 @@ import { Server } from "socket.io";
 import roomController from "./controllers/room.controller.js";
 import Room from "./models/room.model.js";
 import bcrypt from "bcryptjs";
+import serverless from "serverless-http";
 
 dotenv.config();
 dbconnection();
@@ -134,3 +135,5 @@ io.on("connection", (socket) => {
 const port = process.env.PORT || 3000;
 
 httpServer.listen(port, () => console.log(`Server running on port ${port}`));
+
+export const handler = serverless(api);
