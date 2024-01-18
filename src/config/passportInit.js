@@ -11,7 +11,7 @@ passport.use(
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL:
-        "https://utube-together-backend.vercel.app/auth/google/callback",
+        "https://utubetogetherbackend-production.up.railway.app/auth/google/callback",
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {

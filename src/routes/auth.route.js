@@ -2,7 +2,6 @@ import { Router } from "express";
 import { FRONTEND_URL } from "../config/env.js";
 import passportInit from "../config/passportInit.js";
 import authController from "../controllers/auth.controller.js";
-import validate from "../helpers/validation.js";
 import isLoggedIn from "../middlewares/isLoggedIn.js";
 
 const router = Router();
