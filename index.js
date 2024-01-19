@@ -53,6 +53,7 @@ app.use(
     origin: [
       "https://levanduc18.github.io/utube-together",
       "https://levanduc18.github.io",
+      // "http://localhost:8080",
     ],
   })
 );
@@ -63,9 +64,6 @@ app.use("/room", roomRoute);
 // Socket server
 io.on("connection", (socket) => {
   console.log("Co user ket noi!");
-
-  let setIter = socket.rooms.values();
-  let currentRoom = setIter.next().value;
 
   socket.on("createRoom", async (data) => {
     const response = await roomController.createRoom(data);
@@ -100,6 +98,7 @@ io.on("connection", (socket) => {
       io.to(data.room).emit("changedVideoUrl", {
         user: data.name,
         link: data.link,
+        room: data.room,
       });
     else socket.emit("error", response.message);
   });
@@ -109,11 +108,12 @@ io.on("connection", (socket) => {
       user: data.user,
       status: data.status,
       currentTime: data.currentTime,
+      room: data.room,
+      userName: data.userName,
     });
   });
 
   socket.on("sendMessage", async (data) => {
-    console.log(data);
     io.to(data.room).emit("receivedMessage", {
       user: data.user,
       message: data.message,
